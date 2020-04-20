@@ -1,0 +1,62 @@
+{
+    "app-id": "org.rdesktop.rdesktop",
+    "separate-locales": false,
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "19.08",
+    "sdk": "org.freedesktop.Sdk",
+    "finish-args": [
+        "--share=ipc",
+        "--share=network",
+        "--filesystem=host",
+        "--socket=fallback-x11",
+        "--socket=pulseaudio"
+    ],
+    "collection-id": "org.rdesktop.Master",
+    "command": "rdesktop",
+    "modules": [
+        {
+            "name": "pcsc-lite",
+            "config-opts": [
+                "--prefix=${FLATPAK_DEST}",
+                "--with-systemdsystemunitdir=${FLATPAK_DEST}/systemd/system"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://pcsclite.apdu.fr/files/pcsc-lite-1.8.26.tar.bz2",
+                    "sha256": "3eb7be7d6ef618c0a444316cf5c1f2f9d7227aedba7a192f389fe3e7c0dfbbd9"
+                }
+            ]
+        },
+        {
+            "name": "krb5",
+            "config-opts": [
+                "--prefix=${FLATPAK_DEST}",
+                "--enable-dns-for-realm"
+            ],
+            "subdir": "src",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://web.mit.edu/kerberos/www/dist/krb5/1.18/krb5-1.18.1.tar.gz",
+                    "sha256": "02a4e700f10936f937cd1a4c303cab8687a11abecc6107bd4b706b9329cd5400"
+                }
+            ]
+        },
+        {
+            "name": "rdesktop",
+            "config-opts": [
+                "--prefix=${FLATPAK_DEST}",
+                "--with-ipv6",
+                "--with-sound",
+                "--disable-smartcard"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/rdesktop/rdesktop"
+                }
+            ]
+        }
+    ]
+}
